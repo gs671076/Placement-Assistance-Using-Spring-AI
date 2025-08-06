@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{student/base2 :: Layout(~{::section})}">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <section>
+            <h1 class="text-center">All Jobs</h1>
+            <div th:if="${message!=null}" th:classappend="${message.type}" class="alert ">
+                <p th:text="${message.content}"></p>
+
+            </div>
+            <div th:if="${recruit}!=null">
+                <div th:each="n:${recruit}">
+                    <div class="card">
+                        <div class="card-header backgroundN text-center mt-2">
+                            <h2 th:text="${n.name}"></h2>
+                        </div>
+                        <div class="card-body">
+                            <h3>Package/Salary</h3>
+                            <p th:text="${n.salary}"></p>
+                            <h3>Job Description</h3>
+                            <pre th:text="${n.description}"></pre>
+                            <h3>Last Date to Apply</h3>
+                            <p th:text="${n.date}"></p>
+                        </div>
+                        <div class="card-footer text-center" style="background: #a7ffeb">
+                            
+                            <div th:if="${#lists.contains(applied,n.Id)}">
+                                <span class="text-success">Already Applied</span>
+                            </div>
+                            <div th:unless="${#lists.contains(applied, n.Id)}">
+                                <a class="btn btn-primary" th:href="@{/student/job/apply/{id}(id=${n.id})}">Apply</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

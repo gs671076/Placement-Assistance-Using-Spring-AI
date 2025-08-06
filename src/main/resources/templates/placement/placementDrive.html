@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{placement/base3 :: Layout(~{::section})}">
+
+    <body>
+        <section>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Placement Drives</h2>
+                </div>
+                <div class="card-body">
+                    <a th:href="@{/Placement/placementDrive/add}">ADD PLACEMENT</a><br>
+                    <a th:href="@{/Placement/manage}">MANAGE PLACEMENT</a>
+
+                </div>
+            </div>
+
+        </section>
+    </body>
+</html>

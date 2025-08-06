@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{base :: Layout(~{::section})}">
+    
+    <body>
+        <section> 
+            <div class="jumbotron jumbotron-fluid" style="background-color: #a7ffeb ;">
+                <div class="container">
+                    <h1 class="display-4">Placement Assistance</h1>
+                    <p class="lead">Our placement assistance program is designed to support students in securing job opportunities in leading companies. We offer personalized career counseling, resume building workshops, mock interviews, and connections with industry professionals. Our team works closely with recruiters to match students' skills with the right job opportunities. With a strong network of alumni and partnerships with top companies, we aim to ensure that every student is well-prepared to enter the job market with confidence.</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Career Counseling</h2>
+                            </div>
+                            <div class="card-body">
+                                <p>Personalized guidance to help you identify the right career path.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a th:href="@{/login}">Click Here</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Resume Workshops</h2>
+                            </div>
+                            <div class="card-body">
+                                <p>Build a professional resume that highlights your strengths.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a th:href="@{/login}">Click Here</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Mock Interviews</h2>
+                            </div>
+                            <div class="card-body">
+                                <p>Practice your interview skills with industry experts.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a th:href="@{/login}">Click Here</a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

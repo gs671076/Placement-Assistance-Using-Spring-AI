@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{base :: Layout(~{::section})}">
+
+    <body>
+        <section>
+            <div class="container" style="margin-top: 15px">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <div class="card">
+                            <div class="card-header text-center" style="background:#4EA6DA;">
+                                <span class="fa fa-user fa-3x"></span><p>Admin Login</p> 
+                                <div th:if="${message!=null}" th:classappend="${message.type}" class="alert ">
+                                    <p th:text="${message.content}"></p>
+                                    
+                                </div>
+                               
+                            </div>
+                            <form th:action="@{/process-placementLogin}" method="post">
+                                <div class=" card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Username</label>
+                                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    </div>
+
+                                    <div class="card-header container text-center " style="background:#4EA6DA;">
+                                        <button type="submit" class="btn btn-primary ">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.body.style.background="#eeeeee";
+            </script>
+
+        </section>
+    </body>
+</html>

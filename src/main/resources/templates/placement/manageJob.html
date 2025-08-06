@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{placement/base3 :: Layout(~{::section})}">
+    <head>
+        <title>Manage Jobs</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section class="container mt-4">
+            <h2 class="text-center mb-3">Manage Jobs</h2>
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Job Title</th>
+                        <th>Salary</th>
+                        <th>Placement Authority Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="app : ${applications.content}">
+                        <td th:text="${app.id}"></td>
+                        <td th:text="${app.name}"></td>
+                        <td th:text="${app.salary}"></td>
+                        <td th:text="${app.placement != null ? app.placement.name : 'N/A'}"></td>
+                        <td>
+                            <!-- Delete Button -->
+                            <a href="#" class="text-danger delete-btn" th:data-id="${app.id}">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+
+                            <!-- Edit Button -->
+                            <a th:href="@{/Placement/edit/{id}(id=${app.id})}" class="text-primary ms-3">
+                                <i class="fa-solid fa-paintbrush"></i>
+                            </a>
+                            <a th:href="@{/Placement/view-applications/{id}(id=${app.placement.pid})}"><i class="fa-solid fa-eye"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination Controls -->
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <!-- Previous Button -->
+                    <li class="page-item" th:if="${currentPage > 0}">
+                        <a class="page-link" th:href="@{/Placement/manage(page=${currentPage - 1}, size=5)}">Previous</a>
+                    </li>
+                    <li class="page-item disabled" th:if="${currentPage == 0}">
+                        <span class="page-link">Previous</span>
+                    </li>
+
+                    <!-- Page Numbers -->
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link" th:href="@{/Placement/manage(page=${i}, size=5)}" th:text="${i + 1}"></a>
+                    </li>
+
+                    <!-- Next Button -->
+                    <li class="page-item" th:if="${currentPage + 1 < totalPages}">
+                        <a class="page-link" th:href="@{/Placement/manage(page=${currentPage + 1}, size=5)}">Next</a>
+                    </li>
+                    <li class="page-item disabled" th:if="${currentPage + 1 >= totalPages}">
+                        <span class="page-link">Next</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- JavaScript Function for Deletion -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.querySelectorAll(".delete-btn").forEach(button => {
+                        button.addEventListener("click", function (event) {
+                            event.preventDefault(); // Prevent page jump
+                            let jobId = this.getAttribute("data-id"); // Get job ID from attribute
+                            deleteJob(this, jobId);
+                        });
+                    });
+                });
+                function deleteJob(element, jobId) {
+                    if (confirm("Are you sure you want to delete this job?")) {
+                        fetch('/Placement/delete/' + jobId, {
+                            method: 'DELETE'
+                        })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error("Failed to delete job.");
+                                    }
+                                    return response.json().catch(() => ({status: "success", message: "Job deleted successfully!"}));
+                                })
+                                .then(data => {
+                                    if (data.status === "success") {
+                                        alert(data.message);
+                                        let row = element.closest('tr');
+                                        if (row)
+                                            row.remove(); // Safely remove the row
+                                    } else {
+                                        alert("Error: " + data.message);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert("An error occurred while deleting the job.");
+                                });
+                    }
+                }
+
+            </script>
+        </section>
+    </body>
+</html>

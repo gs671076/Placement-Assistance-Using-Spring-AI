@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="Layout(content)">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title th:text="${title1 != null ? title1 : 'Dashboard'}">Dashboard</title>
+        
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+        <script th:src="@{/javascript/script1.js}"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-bgdark navbar-custom" style="position: fixed;">
+            <a class="navbar-brand" th:href="@{/Placement/dashboard}"><span class="fas fa-dove"></span> Placement Assistance</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/Placement/dashboard}"><i class="fa-brands fa-superpowers"></i> Dashboard</a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <!--<a th:value="${placement.name}"></a>-->
+                        <a class="nav-link" th:href="@{/logoutPA}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="sidebar">
+            <span onclick="toggleSidebar()" class="crossBtn">&times;</span>
+            <a th:href="@{/Placement/dashboard}"><i class="fa-solid fa-house"></i> Home</a>
+            <a th:href="@{/Placement/placement-drive}"><i class="fa-solid fa-earth-asia"></i> Placement Drive</a>
+            <a th:href="@{/Placement/manage}"><i class="fa-solid fa-earth-asia"></i> Manage Placements</a>
+            <a th:href="@{/Placement/mocktest}"><i class="fa-regular fa-file-lines"></i> Add Mock Test</a>
+            <a class="item" th:href="@{/logoutPA}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="content">
+            <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+            <div th:replace="${content}"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        
+        <script>
+            const toggleSidebar = () => {
+                if ($('.sidebar').is(":visible")) {
+                    $('.sidebar').css("display", "none");
+                    $('.content').css("margin-left", "0%");
+                } else {
+                    $('.sidebar').css("display", "block");
+                    $('.content').css("margin-left", "20%");
+                }
+            };
+        </script>
+    </body>
+</html>

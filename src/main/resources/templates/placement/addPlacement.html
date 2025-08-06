@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{placement/base3 :: Layout(~{::section})}">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section>
+            <div class="container">
+                <form th:action="@{/Placement/placementDrive/process}" method="post" th:object="${recruit}">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header text-center" style="background:#4EA6DA;">
+                                <span class="fa fa-pencil-square-o fa-3x"></span><p>Post Recruitment</p> 
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="name">Post Name</label>
+                                    <input name="name" type="text" class="form-control" id="name"  placeholder="Enter name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="salary">Expected Salary/Package</label>
+                                    <input name="salary" type="text" class="form-control" id="salary"  placeholder="Enter here">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Job Description</label>
+                                    <textarea rows="10" class="form-control" name="description"> </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Last date of Applying</label>
+                                    <input type="date" class="form-control" name="date" >
+                                </div>
+                            </div> 
+                            <div class="card-footer text-center" style="background:#4EA6DA;">
+                                <button type="submit" class="btn btn-primary">Post</button>
+                            </div>
+                        </div> 
+                        <div th:if="${message!=null}" th:classappend="${message.type}" class="alert ">
+                            <p th:text="${message.content}"></p>
+
+                        </div>
+
+                    </div>
+                </form> 
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{student/base2 :: Layout(~{::section})}">
+
+    <body>
+        <section>
+            <h2>Welcome To Placement Assistance Dashboard</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center" th:text="${student.name}"></h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th  scope="row">Email: </th>
+                            <td th:text="${student.email}"></td>
+                        </tr>
+                        <tr>
+                            <th  scope="row">Contact: </th>
+                            <td th:text="${student.contact}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Enrollment Number: </th>
+                            <td th:text="${student.enrollmentNumber}"></td>
+                        </tr>
+                         <tr>
+                            <th scope="row"> Date Of Birth: </th>
+                            <td th:text="${student.dob}"></td>
+                        </tr>
+                         <tr>
+                            <th scope="row">Address: </th>
+                            <td th:text="${student.address}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section> 
+
+    </body>
+</html>

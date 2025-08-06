@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{placement/base3 :: Layout(~{::section})}">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Create a New Mock Test</h2>
+                </div>
+                <form th:action="@{/Placement/mocktests-create}" method="post" th:object="${mockTest}">
+                    <div class="card-body">
+
+                        <label>Test Title:</label>
+                        <input class="form-control mb-2" type="text" name="title" required /><br>
+
+                        <label>Test Description:</label>
+                        <input class="form-control mb-2"  type="text" name="description" required /><br>
+
+                        <h3>Questions:</h3>
+                        <div id="questions"></div>
+
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" type="button" onclick="addQuestion()">Add Question</button>
+                        <button class="btn btn-primary" type="submit">Create Test</button>
+
+                    </div>
+                </form>
+            </div>
+
+
+
+
+            <script>
+                let questionCount = 0;
+
+                function addQuestion() {
+                    let questionHTML = `
+                <div class="question mb-3 p-3 border rounded">
+                    <label>Question:</label>
+                    <input type="text" name="questions[${questionCount}].question" required class="form-control mb-2" /><br>
+
+                    <label>Options:</label><br>
+                    <input class="form-control mb-2"  type="text" name="questions[${questionCount}].answers[0].answer" required  placeholder="Enter Option A"/><br>
+
+                    <input class="form-control mb-2"  type="text" name="questions[${questionCount}].answers[1].answer" required placeholder="Enter Option B" /><br>
+
+                    <input class="form-control mb-2" type="text" name="questions[${questionCount}].answers[2].answer" required placeholder="Enter Option C" /><br>
+
+                    <input class="form-control mb-2"  type="text" name="questions[${questionCount}].answers[3].answer" required placeholder="Enter Option D" /><br>
+                    
+                    <label>Correct Answer:</label><br>
+                    <input class="form-control mb-2"  type="text" name="questions[${questionCount}].correctAnswer" placeholder="Enter Correct Answer"  required /><br>
+                </div>
+            `;
+                    document.getElementById("questions").insertAdjacentHTML('beforeend', questionHTML);
+                    questionCount++;
+                }
+            </script>
+        </section>
+    </body>
+</html>

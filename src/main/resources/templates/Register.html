@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: Layout(~{::section})}">
+    <body>
+        <section class="img1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="card" style="margin-top: 10px;">
+                            <div class="card-header text-center" style="background:#4EA6DA;">
+                                <span class="fa fa-user-circle fa-3x"></span>
+                                <h3>Register Here!</h3>
+                            </div>
+                            <form th:action="@{/add-student}" method="post" th:object="${student}">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input name="name" type="text" class="form-control" id="name" th:value="${student.name}" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('name')}" th:text="${e}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" th:value="${student.email}" aria-describedby="emailHelp" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('email')}" th:text="${e}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input name="contact" type="text" class="form-control" id="phone" th:value="${student.contact}" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('contact')}" th:text="${e}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input name="address" type="text" class="form-control" id="address" th:value="${student.address}" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('address')}" th:text="${e}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dob">Date of Birth</label>
+                                        <input name="dob" type="date" class="form-control" id="date" th:value="${student.dob}" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('dob')}" th:text="${e}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" th:value="${student.password}" autocomplete="new-password" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('password')}" th:text="${e}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="rollNumber">Roll Number</label>
+                                        <input name="rollNumber" type="text" class="form-control" id="rollNumber" th:value="${student.rollNumber}" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('rollNumber')}" th:text="${e}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="enrollmentNumber">Enrollment Number</label>
+                                        <input name="enrollmentNumber" type="text" class="form-control" id="enrollmentNumber" th:value="${student.enrollmentNumber}" required>
+                                        <p class="error-message" th:each="e : ${#fields.errors('enrollmentNumber')}" th:text="${e}"></p>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer text-center" style="background:#4EA6DA;">
+                                    <button type="submit" class="btn btn-primary text-center">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.querySelectorAll("p").forEach(p => p.style.color = "red");
+            </script>
+        </section>
+    </body>
+</html>

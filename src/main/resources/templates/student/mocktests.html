@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{student/base2 :: Layout(~{::section})}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section>
+            <div class="container mt-5">
+                <h2 class="text-center">Available Mock Tests</h2>
+                <div class="list-group">
+                    <div th:if="${mockTests != null and not #lists.isEmpty(mockTests)}">
+                        <div th:each="mockTest : ${mockTests}">
+                            <a th:href="@{'/student/mocktest/' + ${mockTest.id}}" class="list-group-item list-group-item-action">
+                                <h5 th:text="${mockTest.title}"></h5>
+                                <p th:text="${mockTest.description}"></p>
+                            </a>
+                        </div>
+                    </div>
+                    <div th:unless="${mockTests != null and not #lists.isEmpty(mockTests)}">
+                        <h3>No Mock Test is available now. </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jan 12, 2025, 10:03:39 PM
+    Author     : gs671
+*/
+
+.navbar-custom {
+    background-color: #ffecb3 ;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.img1{
+    margin: 0px;
+    background: url('/img/login1.jpg');
+    background-attachment: fixed;
+    background-size: cover
+}
+.div-custom {
+    background-color:  #ffb74d;
+}
+h2 {
+    color: #007bff;
+}
+.primary-background{
+    background:#4EA6DA;
+}
+.card-color{
+    background-color: #ffecb3 ;
+}
+.backgroundN{
+    margin: 0px;
+    background: url('/img/img.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+}
+#img-ab{
+    border-radius: 25%;
+    border: 2px solid black;
+    object-fit: cover;
+}
+/*p{
+    color: red;
+}*/
+.black{
+    color: black !important;
+}
+.sidebar{
+    width: 18%;
+    height: 100%;
+    background-color: aliceblue;
+    position: fixed;
+    padding-top: 45px;
+    margin-top: 16px;
+}
+
+@media only screen and (max-width:600px) {
+    .sidebar{
+        display: none;
+        width: 80% !important;
+        height: 100vh;
+        background-color: aliceblue;
+        position: fixed;
+        padding-top: 20px;
+    }
+    .content{
+        margin-left: 0% !important;
+    }
+}
+.sidebar a{
+    display: block;
+    padding: 10px 25px;
+    width: 100%;
+    text-decoration: none;
+    color: gray;
+}
+.sidebar a:hover{
+    background-color: #e2e2e2;
+}
+
+.sidebar .divider{
+    height: .5px;
+    width: 100%;
+    background: #e2e2e2;
+
+}
+.content{
+    margin-top: 40px;
+    margin-left: 20%;
+}
+.sidebar .crossBtn{
+    position: absolute;
+    top:0;
+    right: 35px;
+    font-size: 30px;
+    cursor: pointer;
+}

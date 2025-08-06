@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{placement/base3 :: Layout(~{::section})}">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section>
+            <div class="container mt-4">
+                <h2 class="text-center mb-4">Applications for Recruitment</h2>
+
+                <!-- If no applications exist -->
+                <div th:if="${applications.isEmpty()}">
+                    <div class="alert alert-warning text-center">No applications found.</div>
+                </div>
+
+                <!-- Applications Table -->
+                <table th:if="${!applications.isEmpty()}" class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Enrollment Number</th>
+                            <th>Resume</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="app : ${applications}">
+                            <td th:text="${app.id}"></td>
+                            <td th:text="${app.name}"></td>
+                            <td th:text="${app.email}"></td>
+                            <td th:text="${app.contact}"></td>
+                            <td th:text="${app.enrollmentNumber}"></td>
+                            <td>
+                                <a th:href="@{/Placement/download-resume/{id}(id=${app.id})}" class="btn btn-primary btn-sm">Download</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-center mt-3">
+                    <a th:href="@{/Placement/dashboard}" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

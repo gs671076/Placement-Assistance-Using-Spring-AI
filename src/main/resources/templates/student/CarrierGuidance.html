@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  th:replace="~{student/base2 :: Layout(~{::section})}">    
+    <head>
+        <meta charset="UTF-8">
+        <title>Carrier Guidance</title>
+    </head>
+    <body>
+        <section>
+            <h1>Carrier Guidance</h1>
+            <form  onsubmit="event.preventDefault(); fetchAIResponse();">
+                <label for="message">Ask any question:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50" placeholder="Type your message here..."></textarea><br>
+                <button type="submit">Submit</button>
+            </form>
+
+            
+             <div>
+                <h2>Your Response</h2>
+                <pre id="aiResponse"></pre>
+            </div>
+            <script>
+            async function fetchAIResponse() {
+                const message = document.getElementById("message").value;
+                const url = `http://localhost:8024/student/ai/generateStream?message=${encodeURIComponent(message)}`;
+                const responseElement = document.getElementById("aiResponse");
+                responseElement.innerText = "";
+                
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder("utf-8");
+                    
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        responseElement.innerText += decoder.decode(value, { stream: true });
+                    }
+                } catch (error) {
+                    console.error("Error fetching AI response:", error);
+                    responseElement.innerText = "Error fetching response";
+                }
+            }
+        </script>
+        </section>
+    </body>
+</html>
