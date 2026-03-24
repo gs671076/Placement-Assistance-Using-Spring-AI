@@ -6,11 +6,13 @@ package com.placement.PA.repository;
 
 import com.placement.PA.entities.Question;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author gs671
  */
+@Repository
 public interface QuestionRepository extends JpaRepositoryImplementation<Question,Long> {
     
 }

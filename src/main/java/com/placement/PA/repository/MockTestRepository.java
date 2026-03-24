@@ -5,11 +5,13 @@
 package com.placement.PA.repository;
 import com.placement.PA.entities.MockTest;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author gs671
  */
+@Repository
 public interface MockTestRepository extends JpaRepositoryImplementation<MockTest, Long> {
     
 }

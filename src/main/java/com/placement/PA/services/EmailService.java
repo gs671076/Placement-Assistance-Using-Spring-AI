@@ -31,7 +31,7 @@ public class EmailService {
     }
     catch(MailException e)
     {
-    log.error("Exception occurred while sending mail "+e);
+    //log.error("Exception occurred while sending mail "+e);
     }
     }
 }
