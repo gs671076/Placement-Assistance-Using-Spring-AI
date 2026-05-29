@@ -7,10 +7,13 @@ package com.placement.PA.controller;
 import com.placement.PA.entities.Message;
 import com.placement.PA.entities.Resume;
 import com.placement.PA.entities.Student;
+import com.placement.PA.repository.StudentRepo;
 import com.placement.PA.services.ResumeService;
 import jakarta.servlet.http.HttpSession;
 import java.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,41 +32,34 @@ public class ResumeController {
 
     @Autowired
     private ResumeService resumeService;
+    @Autowired
+    private StudentRepo studentRepo;
 
     @GetMapping("/resume")
-    public String goResume(Model model, HttpSession session) {
-        Student student = (Student) session.getAttribute("student");
+    public String goResume(Model model, HttpSession session,
+                           @AuthenticationPrincipal UserDetails userDetails) {
 
-        if (student == null) {
-            session.setAttribute("message", new Message("alert-danger", "Session Got Expired"));
-            return "redirect:/login";
-        }
+        Student student = studentRepo.findByEmail(userDetails.getUsername());
+
         model.addAttribute("title1", "Upload Resume");
         model.addAttribute("student", student);
         model.addAttribute("resume", new Resume());
         model.addAttribute("message", session.getAttribute("message"));
-
         session.removeAttribute("message");
-        Resume resume = resumeService.findByStudent(student);
 
-        // Convert file to Base64 string
+        Resume resume = resumeService.findByStudent(student);
         if (resume != null) {
             String base64Resume = Base64.getEncoder().encodeToString(resume.getResume());
-
             model.addAttribute("resume1", base64Resume);
         }
+
         return "student/resume";
     }
 
     @PostMapping("/upload-resume")
-    public String saveResume(@RequestParam("resumeFile") MultipartFile file, HttpSession session) {
-        Student student = (Student) session.getAttribute("student");
+    public String saveResume(@RequestParam("resumeFile") MultipartFile file, HttpSession session,@AuthenticationPrincipal UserDetails userDetails) {
 
-        if (student == null) {
-            session.setAttribute("message", new Message("alert-danger", "Session expired. Please log in again."));
-            return "redirect:/login";
-        }
-
+        Student student = studentRepo.findByEmail(userDetails.getUsername());
         try {
             if (file.isEmpty()) {
                 session.setAttribute("message", new Message("alert-warning", "Please select a file to upload."));
