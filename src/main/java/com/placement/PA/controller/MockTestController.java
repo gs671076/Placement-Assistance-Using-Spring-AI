@@ -33,13 +33,7 @@ public class MockTestController {
     // Show the list of available mock tests
     @GetMapping("/mocktests")
     public String listMockTests(Model model,HttpSession session) {
-        Student student = (Student) session.getAttribute("student");
 
-        // If no student is found, redirect to the login page
-        if (student == null) {
-            session.setAttribute("message", new Message("alert-danger", "Session Got Expired"));
-            return "redirect:/login"; // Redirect to login if not logged in
-        }
 
         List<MockTest> mockTests = mockTestService.getAllMockTests();
         model.addAttribute("mockTests", mockTests);
@@ -50,13 +44,6 @@ public class MockTestController {
     // Show the details of a selected mock test
     @GetMapping("/mocktest/{id}")
     public String getMockTest(@PathVariable Long id, Model model,HttpSession session) {
-        Student student = (Student) session.getAttribute("student");
-
-        // If no student is found, redirect to the login page
-        if (student == null) {
-            session.setAttribute("message", new Message("alert-danger", "Session Got Expired"));
-            return "redirect:/login"; // Redirect to login if not logged in
-        }
 
         MockTest mockTest = mockTestService.getMockTestById(id);
         model.addAttribute("mockTest", mockTest);
@@ -69,14 +56,6 @@ public class MockTestController {
 public String submitMockTest(@RequestParam Long mockTestId, 
                              @RequestParam Map<String, String> selectedAnswers, 
                              Model model,HttpSession session) {
-    
-    Student student = (Student) session.getAttribute("student");
-
-        // If no student is found, redirect to the login page
-        if (student == null) {
-            session.setAttribute("message", new Message("alert-danger", "Session Got Expired"));
-            return "redirect:/login"; // Redirect to login if not logged in
-        }
 
     MockTest mockTest = mockTestService.getMockTestById(mockTestId);
     int score = 0;
